@@ -21,6 +21,7 @@
             <th>Nome</th>
             <th>Data de Nascimento</th>
             <th>Data de Cadastro</th>
+            <th>Ações</th>
         </thead>
         <tbody>
             @forelse ($clients as $client)
@@ -29,6 +30,7 @@
                     <td>{{ $client->name }}</td>
                     <td>{{ $client->date_of_birth }}</td>
                     <td>{{ $client->created_at }}</td>
+                    <td><a href="{{ route('ClientForm.edit', $client->id) }}"></a>Edição</td>
                 </tr>
             
                 @empty
