@@ -30,7 +30,7 @@
                     <td>{{ $client->name }}</td>
                     <td>{{ $client->date_of_birth }}</td>
                     <td>{{ $client->created_at }}</td>
-                    <td><a href="{{ route('ClientForm.edit', $client->id) }}"></a>Edição</td>
+                    <td><a href="{{ route('ClientEdit.edit', $client->id)}}">Edição</a></td>
                 </tr>
             
                 @empty
