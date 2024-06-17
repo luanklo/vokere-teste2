@@ -17,5 +17,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('CleintForm/{client}/edit', [ClientControler::class, 'edit'])->name('CleintForm.edit');
+Route::post('/CleintForm', [ClientControler::class, 'store'])->name('ClientForm.store');
 Route::get('/CleintForm', [ClientControler::class, 'create'])->name('ClientForm.create');
 Route::get('/ClientList', [ClientControler::class, 'index'])->name('ClientList.index');

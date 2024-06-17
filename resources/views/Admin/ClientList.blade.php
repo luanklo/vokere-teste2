@@ -8,6 +8,10 @@
 </head>
 <body>
     <h1>Clientes</h1>
+    
+    @if (session()->has('success'))
+    {{ session('success') }}
+    @endif
 
     <a href="{{route('ClientForm.create')}}">Novo CLiente</a>
 
