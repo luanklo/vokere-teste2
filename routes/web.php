@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ClientControler;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,3 +16,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/CleintForm', [ClientControler::class, 'create'])->name('ClientForm.create');
+Route::get('/ClientList', [ClientControler::class, 'index'])->name('ClientList.index');
