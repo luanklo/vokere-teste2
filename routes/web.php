@@ -25,3 +25,4 @@ Route::get('Client/{client}', [ClientControler::class, 'view'])->name('Client.vi
 Route::post('/ClientForm', [ClientControler::class, 'store'])->name('ClientForm.store');
 Route::get('/ClientForm', [ClientControler::class, 'create'])->name('ClientForm.create');
 Route::get('/ClientList', [ClientControler::class, 'index'])->name('ClientList.index');
+Route::post('/ClientListFilter', [ClientControler::class, 'filter'])->name('ClientListFilter.filter');

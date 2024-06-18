@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edição de Cliente') }}
+            {{ __('Lista de Clientes') }}
         </h2>
     </x-slot>
 
@@ -15,7 +15,17 @@
                     </div>
                 @endif
 
-                <div class="flex justify mb-4">
+                <div class="flex mb-4 justify-between">
+                    <form action="{{ route('ClientListFilter.filter') }}" method="POST" class="flex items-center">
+                        @csrf
+                        <x-label for="filter" :value="__('Filtro')" />
+                        <x-input id="filter" class="block mt-1 ml-2" type="text" name="filter"/>
+                
+                        <x-button class="ml-4">
+                            {{ __('Pesquisar') }}
+                        </x-button>
+                    </form>
+                
                     <a href="{{ route('ClientForm.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest">
                         Novo Cliente
                     </a>

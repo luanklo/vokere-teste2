@@ -11,8 +11,14 @@ class ClientControler extends Controller
 {
     public function index()
     {   
-        //$clients = User::paginate();//User::all();
-        $clients = User::where('name', 'like', '%')->paginate();
+        $clients = User::paginate();//User::all();
+        return view('Admin.ClientList', compact('clients'));
+    }
+
+    public function filter(Request $request)
+    {
+        //dd($request->filter);
+        $clients = User::where('name', 'like', $request->filter.'%')->paginate();
         return view('Admin.ClientList', compact('clients'));
     }
 
