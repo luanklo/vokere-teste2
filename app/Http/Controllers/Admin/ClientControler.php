@@ -11,7 +11,8 @@ class ClientControler extends Controller
 {
     public function index()
     {   
-        $clients = User::paginate();//User::all();
+        //$clients = User::paginate();//User::all();
+        $clients = User::where('name', 'like', '%')->paginate();
         return view('Admin.ClientList', compact('clients'));
     }
 
@@ -40,6 +41,15 @@ class ClientControler extends Controller
         return view('Admin.ClientEdit', compact('client'));
     }
 
+    public function view(Request $request, string $id)
+    {
+        if (!$client = User::find($id)) {
+            return redirect()->route('ClientList.index')->with('message', 'Cliente não encontrado');
+        }
+
+        return view('Admin.Client', compact('client'));
+    }
+
     public function update(Request $request, string $id)
     {
         if (!$client = User::find($id)) {
@@ -51,5 +61,18 @@ class ClientControler extends Controller
         return redirect()
             ->route('ClientList.index')
             ->with('success', 'Cliente atualizado com sucesso');
+    }
+
+    public function delete(Request $request, string $id)
+    {
+        if (!$client = User::find($id)) {
+            return back()->with('message', 'Cliente não encontrado');
+        }
+
+        $client->delete();
+
+        return redirect()
+            ->route('ClientList.index')
+            ->with('success', 'Cliente deletado com sucesso');
     }
 }

@@ -39,7 +39,9 @@
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->date_of_birth }}</td>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->created_at }}</td>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">
+                                    <a href="{{ route('Client.view', $client->id) }}" class="text-white bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">View</a>
                                     <a href="{{ route('ClientEdit.edit', $client->id) }}" class="text-white bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">Edição</a>
+                                    <a href="{{ route('ClientDelete.delete', $client->id) }}" class="text-white bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">Delete</a>
                                 </td>
                             </tr>
                         @empty
@@ -52,11 +54,6 @@
 
                 <div class="mt-4">
                     {{ $clients->links() }}
-                </div>
-
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6 w-1/3">
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Nova Seção</h3>
-                    <p class="text-gray-600 dark:text-gray-400">Esta é uma nova seção adicionada ao lado do dashboard. Você pode colocar qualquer conteúdo aqui, como gráficos, informações adicionais, etc.</p>
                 </div>
             </div>
         </div>
