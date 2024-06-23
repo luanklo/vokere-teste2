@@ -16,7 +16,7 @@
                 @endif
 
                 <div>
-                    <form action="{{ route('ClientListFilter.filter') }}" method="POST">
+                    <form action="{{ route('ClientList.filter') }}" method="POST">
                         @csrf
                         <div class="grid grid-cols-2 gap-4">
                             <div>
