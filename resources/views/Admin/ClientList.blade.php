@@ -16,26 +16,34 @@
                 @endif
 
                 <div>
-                    <form action="{{ route('ClientList.filter') }}" method="POST">
-                        @csrf
+                    <form action="{{ route('ClientList.index') }}" method="GET">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <x-label for="name" :value="__('Filtro')" />
-                                <x-input id="name" class="mt-1 ml-2 w-full" type="text" name="name"/>
+                                <x-input id="name" class="mt-1 ml-2 w-full" type="text" name="name" value="{{ request()->name }}"/>
                             </div>
                             <div>
                                 <x-label for="created_at" :value="__('Data')" />
-                                <x-input id="created_at" class="mt-1 ml-2 w-full" type="date" name="created_at"/>
+                                <x-input id="created_at" class="mt-1 ml-2 w-full" type="date" name="created_at" value="{{ request()->created_at }}"/>
                             </div>
                         </div>
                         
-                        <div class="mt-6">
-                            <x-button>
-                                {{ __('Pesquisar') }}
-                            </x-button>
+                        <div class="mt-6 flex justify-between">
+                            <div class="flex gap-2">
+                                <x-button>
+                                    {{ __('Pesquisar') }}
+                                </x-button>
+                                <a
+                                    href="{{ route('ClientList.index') }}"
+                                    class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest"
+                                >
+                                    Limpar
+                                </a>
+                            </div>
+                            
                             <a
                                 href="{{ route('ClientForm.create') }}"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest"
+                                class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase"
                             >
                                 Novo Cliente
                             </a>
@@ -54,36 +62,36 @@
                         <tr>
                             <th class="px-6 py-4 text-white border-b text-left dark:border-gray-700">ID</th>
                             <th class="px-6 py-4 text-white border-b text-left dark:border-gray-700">Nome</th>
-                            <th class="px-6 py-4 text-white border-b text-left dark:border-gray-700">Data de Nascimento</th>
-                            <th class="px-6 py-4 text-white border-b text-left dark:border-gray-700">Data de Cadastro</th>
-                            <th class="px-6 py-4 text-white border-b text-left dark:border-gray-700">Ações</th>
+                            <th class="px-6 py-4 text-white border-b text-center dark:border-gray-700">Data de Nascimento</th>
+                            <th class="px-6 py-4 text-white border-b text-center dark:border-gray-700">Data de Cadastro</th>
+                            <th class="px-6 py-4 text-white border-b text-center dark:border-gray-700">Ações</th>
                         </tr>
                     </thead>    
                     <tbody>
                         @forelse ($clients as $client)
                             <tr>
-                                <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->id }}</td>
-                                <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->name }}</td>
+                                <td class="px-6 py-4 text-white border-b text-left dark:border-gray-700">{{ $client->id }}</td>
+                                <td class="px-6 py-4 text-white border-b text-left dark:border-gray-700">{{ $client->name }}</td>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ DateTime::createFromFormat('Y-m-d', $client->date_of_birth )->format('d/m/Y') }}</td>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ DateTime::createFromFormat('Y-m-d H:i:s', $client->created_at )->format('d/m/Y') }}</td>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">
                                     <a
                                         href="{{ route('Client.view', $client->id) }}"
-                                        class="text-white bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
+                                        class="p-0.5 text-white bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
                                     >
                                         View
                                     </a>
 
                                     <a
                                         href="{{ route('ClientEdit.edit', $client->id) }}"
-                                        class="text-white bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
+                                        class="p-0.5 text-white bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest mx-1"
                                     >
                                         Edição
                                     </a>
 
                                     <a
                                         href="{{ route('ClientDelete.delete', $client->id) }}"
-                                        class="text-white bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
+                                        class="p-0.5 text-white bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
                                     >
                                         Delete
                                     </a>
@@ -98,7 +106,7 @@
                 </table>
 
                 <div class="mt-4">
-                    {{ $clients->links() }}
+                    {{ $clients->appends(request()->only('name','created_at'))->links() }}
                 </div>
             </div>
         </div>

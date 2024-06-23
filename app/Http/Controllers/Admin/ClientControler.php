@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 
 class ClientControler extends Controller
 {
-    public function index()
-    {   
-        $clients = User::paginate();//User::all();
-        return view('Admin.ClientList', compact('clients'));
-    }
+    #public function index()
+    #{   
+    #    $clients = User::paginate();//User::all();
+    #    return view('Admin.ClientList', compact('clients'));
+    #}
 
-    public function filter(Request $request)
+    public function index(Request $request)
 {
     $clients = User::query();
 
