@@ -53,6 +53,14 @@
                     </div>
 
                     <div class="flex items-center justify-end">
+                        <a
+                            href="{{ route('ClientList.index') }}"
+                            class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest"
+                        >
+                            Cancelar
+                        </a>
+                        
+
                         <x-button class="ml-4">
                             {{ __('Salvar') }}
                         </x-button>
