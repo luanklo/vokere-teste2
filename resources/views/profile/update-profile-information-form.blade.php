@@ -59,6 +59,20 @@
             <x-input-error for="name" class="mt-2" />
         </div>
 
+        <!-- cpf -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="cpf" value="{{ __('cpf') }}" />
+            <x-input id="cpf" type="text" class="mt-1 block w-full" wire:model="state.cpf" required autocomplete="cpf" />
+            <x-input-error for="cpf" class="mt-2" />
+        </div>
+
+        <!-- date_of_birth -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="date_of_birth" value="{{ __('Data de Nascimento') }}" />
+            <x-input id="date_of_birth" type="text" class="mt-1 block w-full" wire:model="state.date_of_birth" required autocomplete="date_of_birth" />
+            <x-input-error for="date_of_birth" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="email" value="{{ __('Email') }}" />

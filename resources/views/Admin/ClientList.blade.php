@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
                 @if (session()->has('success'))
@@ -15,22 +15,40 @@
                     </div>
                 @endif
 
-                <div class="flex mb-4 justify-between">
-                    <form action="{{ route('ClientListFilter.filter') }}" method="POST" class="flex items-center">
+                <div>
+                    <form action="{{ route('ClientListFilter.filter') }}" method="POST">
                         @csrf
-                        <x-label for="filter" :value="__('Filtro')" />
-                        <x-input id="filter" class="block mt-1 ml-2" type="text" name="filter"/>
-                
-                        <x-button class="ml-4">
-                            {{ __('Pesquisar') }}
-                        </x-button>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <x-label for="name" :value="__('Filtro')" />
+                                <x-input id="name" class="mt-1 ml-2 w-full" type="text" name="name"/>
+                            </div>
+                            <div>
+                                <x-label for="created_at" :value="__('Data')" />
+                                <x-input id="created_at" class="mt-1 ml-2 w-full" type="date" name="created_at"/>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <x-button>
+                                {{ __('Pesquisar') }}
+                            </x-button>
+                            <a
+                                href="{{ route('ClientForm.create') }}"
+                                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest"
+                            >
+                                Novo Cliente
+                            </a>
+                        </div>
                     </form>
-                
-                    <a href="{{ route('ClientForm.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest">
-                        Novo Cliente
-                    </a>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <table class="w-full dark:bg-gray-800">
                     <thead>
                         <tr>
@@ -46,12 +64,29 @@
                             <tr>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->id }}</td>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->name }}</td>
-                                <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->date_of_birth }}</td>
-                                <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ $client->created_at }}</td>
+                                <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ DateTime::createFromFormat('Y-m-d', $client->date_of_birth )->format('d/m/Y') }}</td>
+                                <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">{{ DateTime::createFromFormat('Y-m-d H:i:s', $client->created_at )->format('d/m/Y') }}</td>
                                 <td class="px-6 py-4 text-white border-b text-center dark:border-gray-700">
-                                    <a href="{{ route('Client.view', $client->id) }}" class="text-white bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">View</a>
-                                    <a href="{{ route('ClientEdit.edit', $client->id) }}" class="text-white bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">Edição</a>
-                                    <a href="{{ route('ClientDelete.delete', $client->id) }}" class="text-white bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">Delete</a>
+                                    <a
+                                        href="{{ route('Client.view', $client->id) }}"
+                                        class="text-white bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
+                                    >
+                                        View
+                                    </a>
+
+                                    <a
+                                        href="{{ route('ClientEdit.edit', $client->id) }}"
+                                        class="text-white bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
+                                    >
+                                        Edição
+                                    </a>
+
+                                    <a
+                                        href="{{ route('ClientDelete.delete', $client->id) }}"
+                                        class="text-white bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest "
+                                    >
+                                        Delete
+                                    </a>
                                 </td>
                             </tr>
                         @empty

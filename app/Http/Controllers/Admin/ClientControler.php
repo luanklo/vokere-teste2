@@ -16,11 +16,22 @@ class ClientControler extends Controller
     }
 
     public function filter(Request $request)
-    {
-        //dd($request->filter);
-        $clients = User::where('name', 'like', $request->filter.'%')->paginate();
-        return view('Admin.ClientList', compact('clients'));
+{
+    $clients = User::query();
+
+    if (!empty($request->name)) {
+        $clients->where('name', 'like', $request->name.'%');
     }
+
+    if (!empty($request->created_at)) {
+        $clients->whereDate('created_at', '=', $request->created_at);
+    }
+
+    $clients = $clients->paginate();
+
+    return view('Admin.ClientList', compact('clients'));
+}
+
 
     public function create()
     {
