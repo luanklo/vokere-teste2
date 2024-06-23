@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,16 +21,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('Amd', function (User $user) {
-            return $user->hasPermission('admin');
+        $this->registerPolicies();
+
+        Gate::define('Adm', function (User $user) {
+            return $user->hasPermission(3);
         });
 
         Gate::define('Manager', function (User $user) {
-            return $user->hasPermission('manage-users');
+            return $user->hasPermission(2);
         });
 
         Gate::define('Client', function (User $user) {
-            return $user->hasPermission('manage-users');
+            return $user->hasPermission(1);
         });
     }
 }

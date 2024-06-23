@@ -17,11 +17,13 @@
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('ClientList.index') }}" :active="request()->routeIs('ClientList.index')">
-                        {{ __('Clientes') }}
-                    </x-nav-link>
-                </div>
+                @can('Manager')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('ClientList.index') }}" :active="request()->routeIs('ClientList.index')">
+                            {{ __('Clientes') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

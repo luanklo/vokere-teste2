@@ -67,4 +67,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hasPermission(int $id)
+    {
+        return $this->current_team_id >= $id;
+    }
 }
