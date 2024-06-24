@@ -38,8 +38,7 @@ class CreateNewUser implements CreatesNewUsers
                 'date_of_birth' => $input['date_of_birth'],
                 'password' => Hash::make($input['password']),
                 'current_team_id' => 3,
-            ]), function () {}
-        );
+            ]), function () {});
         });
     }
 }

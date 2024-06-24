@@ -8,29 +8,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientControler extends Controller
-{
-    #public function index()
-    #{   
-    #    $clients = User::paginate();//User::all();
-    #    return view('Admin.ClientList', compact('clients'));
-    #}
+{   
 
-    public function index(Request $request)
-{
+    public function index(Request $filter){
     $clients = User::query();
 
     if (!empty($request->name)) {
-        $clients->where('name', 'like', $request->name.'%');
+        $clients->where('name', 'like', $filter->name.'%');
     }
 
     if (!empty($request->created_at)) {
-        $clients->whereDate('created_at', '=', $request->created_at);
+        $clients->whereDate('created_at', '=', $filter->created_at);
     }
 
     $clients = $clients->paginate();
 
-    return view('Admin.ClientList', compact('clients'));
-}
+    return view('Admin.ClientList', compact('clients','filter'));
+    }
 
 
     public function create()

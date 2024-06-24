@@ -31,6 +31,36 @@
                         </ul>
                     @endif
 
+                    <div class="mt-4">
+                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
+                                <!-- Profile Photo File Input -->
+                                <input type="file" id="photo" class="hidden"
+                                            wire:model.live="photo"
+                                            x-ref="photo"
+                                            x-on:change="
+                                                    photoName = $refs.photo.files[0].name;
+                                                    const reader = new FileReader();
+                                                    reader.onload = (e) => {
+                                                        photoPreview = e.target.result;
+                                                    };
+                                                    reader.readAsDataURL($refs.photo.files[0]);
+                                            " />
+                                <x-label for="photo" value="{{ __('Photo') }}" />
+                                <!-- Current Profile Photo -->
+                                <div class="mt-2" x-show="! photoPreview">
+                                    <img src="{{ $client->profile_photo_url }}" alt="{{ $client->name }}" class="rounded-full h-20 w-20 object-cover">
+                                </div>
+                                <!-- New Profile Photo Preview -->
+                                <div class="mt-2" x-show="photoPreview" style="display: none;">
+                                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
+                                          x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
                     <div>
                         <x-label for="name" value="{{ __('Name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $client->name }}"/>
@@ -52,9 +82,12 @@
                     </div>
 
                     <div class="flex items-center justify-end">
-                        <x-button class="ml-4">
-                            {{ __('Voltar') }}
-                        </x-button>
+                        <a
+                            href="{{ route('ClientList.index') }}"
+                            class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest"
+                        >
+                            Voltar
+                        </a>
                     </div>
                 </form>
             </div>

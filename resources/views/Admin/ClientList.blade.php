@@ -20,11 +20,11 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <x-label for="name" :value="__('Filtro')" />
-                                <x-input id="name" class="mt-1 ml-2 w-full" type="text" name="name" value="{{ request()->name }}"/>
+                                <x-input id="name" class="mt-1 ml-2 w-full" type="text" name="name" value="{{ $filter->name }}"/>
                             </div>
                             <div>
                                 <x-label for="created_at" :value="__('Data')" />
-                                <x-input id="created_at" class="mt-1 ml-2 w-full" type="date" name="created_at" value="{{ request()->created_at }}"/>
+                                <x-input id="created_at" class="mt-1 ml-2 w-full" type="date" name="created_at" value="{{ $filter->created_at }}"/>
                             </div>
                         </div>
                         
