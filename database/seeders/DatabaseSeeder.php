@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
 
         Team::create(['name' => 'Client']);
         Team::create(['name' => 'Manager']);
-        Team::create(['name' => 'Amd']);
+        Team::create(['name' => 'Admin']);
     }
 }

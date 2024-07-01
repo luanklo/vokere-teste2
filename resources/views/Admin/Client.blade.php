@@ -61,24 +61,80 @@
                         @endif
                     </div>
 
-                    <div>
-                        <x-label for="name" value="{{ __('Name') }}" />
-                        <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $client->name }}"/>
+                    <h2 class="text-white text-center">Dados de Login</h2>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-label for="email" value="{{ __('Email') }}" />
+                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ $client->email }}" required autocomplete="username" />
+                        </div>
+
+                        {{-- <div>
+                            <x-label for="password" value="{{ __('Password') }}" />
+                            <x-input id="password" class="block mt-1 w-full" type="password" value="" required autocomplete="new-password" />
+                        </div> --}}
                     </div>
-            
-                    <div class="mt-4">
-                        <x-label for="cpf" value="{{ __('CPF') }}" />
-                        <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" value="{{ $client->cpf }}"/>
+
+                    <h2 class="text-white text-center">Dados pessoais</h2>
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <x-label for="name" value="{{ __('Name') }}" />
+                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $client->name }}" required autofocus autocomplete="name" />
+                        </div>
+
+                        <div>
+                            <x-label for="cpf" value="{{ __('CPF') }}" />
+                            <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" value="{{ $client->cpf }}" required autocomplete="cpf" />
+                        </div>
+
+                        <div>
+                            <x-label for="date_of_birth" value="{{ __('Data de Nascimento') }}" />
+                            <x-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" value="{{ $client->date_of_birth }}" required autocomplete="bdate" />
+                        </div>
                     </div>
-            
-                    <div class="mt-4">
-                        <x-label for="date_of_birth" value="{{ __('Data de Nascimento') }}" />
-                        <x-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" value="{{ $client->date_of_birth }}"/>
+                    
+                    <h2 class="text-white text-center">Endereço</h2>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-label for="street" value="{{ __('Rua') }}" />
+                            <x-input id="street" class="block mt-1 w-full" type="text" name="street" value="{{ $address->street }}" required autofocus autocomplete="street" />
+                        </div>
+
+                        <div>
+                            <x-label for="number" value="{{ __('Numero') }}" />
+                            <x-input id="number" class="block mt-1 w-full" type="text" name="number" value="{{ $address->number }}" required autofocus autocomplete="number" />
+                        </div>
                     </div>
-            
-                    <div class="mt-4">
-                        <x-label for="email" value="{{ __('Email') }}" />
-                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ $client->email }}"/>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-label for="complement" value="{{ __('Complemento') }}" />
+                            <x-input id="complement" class="block mt-1 w-full" type="text" name="complement" value="{{ $address->complement }}" required autofocus autocomplete="complement" />
+                        </div>
+    
+                        <div>
+                            <x-label for="neighborhood" value="{{ __('Bairro') }}" />
+                            <x-input id="neighborhood" class="block mt-1 w-full" type="text" name="neighborhood" value="{{ $address->neighborhood }}" required autofocus autocomplete="neighborhood" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <x-label for="city" value="{{ __('Cidade') }}" />
+                            <x-input id="city" class="block mt-1 w-full" type="text" name="city" value="{{ $address->city }}" required autofocus autocomplete="city" />
+                        </div>
+    
+                        <div>
+                            <x-label for="state" value="{{ __('Estado') }}" />
+                            <x-input id="state" class="block mt-1 w-full" type="text" name="state" value="{{ $address->state }}" required autofocus autocomplete="state" />
+                        </div>
+
+                        <div>
+                            <x-label for="cep" value="{{ __('Cep') }}" />
+                            <x-input id="cep" class="block mt-1 w-full" type="text" name="cep" value="{{ $address->cep }}" required autofocus autocomplete="cep" />
+                        </div>
                     </div>
 
                     <div class="flex items-center justify-end">

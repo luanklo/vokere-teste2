@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             # Rua, Número, Complemento, Bairro, Cidade, Estado, CEP
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
             $table->string('street');
             $table->string('number');
             $table->string('complement');

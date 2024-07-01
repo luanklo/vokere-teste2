@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -31,7 +32,8 @@ class User extends Authenticatable
         'date_of_birth',
         'email',
         'password',
-        'current_team_id'
+        'current_team_id',
+        'address_id',
     ];
 
     /**
@@ -71,5 +73,10 @@ class User extends Authenticatable
     public function hasPermission(int $id)
     {
         return $this->current_team_id >= $id;
+    }
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(Address::class,'id','address_id');
     }
 }

@@ -23,69 +23,80 @@
                 <form action="{{ route('ClientForm.store') }}" method="POST" class="space-y-6">
                     @csrf
 
-                    <div class="mt-4">
-                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
-                                <!-- Profile Photo File Input -->
-                                <input type="file" id="photo" class="hidden" name='profile_photo_path'
-                                            wire:model.live="photo"
-                                            x-ref="photo"
-                                            x-on:change="
-                                                    photoName = $refs.photo.files[0].name;
-                                                    const reader = new FileReader();
-                                                    reader.onload = (e) => {
-                                                        photoPreview = e.target.result;
-                                                    };
-                                                    reader.readAsDataURL($refs.photo.files[0]);
-                                            " />
-                                <x-label for="photo" value="{{ __('Photo') }}" />
-                                <!-- Current Profile Photo -->
-                                <div class="mt-2" x-show="! photoPreview">
-                                    {{-- <img src="{{ $client->profile_photo_url }}" alt="{{ $client->name }}" class="rounded-full h-20 w-20 object-cover"> --}}
-                                    <img src="{{ Null }}" alt="{{ Null }}" class="rounded-full h-20 w-20 object-cover">
-                                </div>
-                                <!-- New Profile Photo Preview -->
-                                <div class="mt-2" x-show="photoPreview" style="display: none;">
-                                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                                          x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
-                                    </span>
-                                </div>
-                                <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                                    {{ __('Select A New Photo') }}
-                                </x-secondary-button>
-                                {{-- @if ($client->profile_photo_path)
-                                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                                        {{ __('Remove Photo') }}
-                                    </x-secondary-button>
-                                @endif --}}
-                                <x-input-error for="photo" class="mt-2" />
-                            </div>
-                        @endif
+                    <h2 class="text-white text-center">Dados de Login</h2>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-label for="email" value="{{ __('Email') }}" />
+                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                        </div>
+
+                        <div>
+                            <x-label for="password" value="{{ __('Password') }}" />
+                            <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                        </div>
                     </div>
 
-                    <div>
-                        <x-label for="name" value="{{ __('Name') }}" />
-                        <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                    <h2 class="text-white text-center">Dados pessoais</h2>
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <x-label for="name" value="{{ __('Name') }}" />
+                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        </div>
+
+                        <div>
+                            <x-label for="cpf" value="{{ __('CPF') }}" />
+                            <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required autocomplete="cpf" />
+                        </div>
+
+                        <div>
+                            <x-label for="date_of_birth" value="{{ __('Data de Nascimento') }}" />
+                            <x-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" :value="old('date_of_birth')" required autocomplete="bdate" />
+                        </div>
                     </div>
-            
-                    <div class="mt-4">
-                        <x-label for="cpf" value="{{ __('CPF') }}" />
-                        <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required autocomplete="cpf" />
+                    
+                    <h2 class="text-white text-center">Endereço</h2>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-label for="street" value="{{ __('Rua') }}" />
+                            <x-input id="street" class="block mt-1 w-full" type="text" name="street" :value="old('street')" required autofocus autocomplete="street" />
+                        </div>
+
+                        <div>
+                            <x-label for="number" value="{{ __('Numero') }}" />
+                            <x-input id="number" class="block mt-1 w-full" type="text" name="number" :value="old('number')" required autofocus autocomplete="number" />
+                        </div>
                     </div>
-            
-                    <div class="mt-4">
-                        <x-label for="date_of_birth" value="{{ __('Data de Nascimento') }}" />
-                        <x-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" :value="old('date_of_birth')" required autocomplete="bdate" />
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <x-label for="complement" value="{{ __('Complemento') }}" />
+                            <x-input id="complement" class="block mt-1 w-full" type="text" name="complement" :value="old('complement')" required autofocus autocomplete="complement" />
+                        </div>
+    
+                        <div>
+                            <x-label for="neighborhood" value="{{ __('Bairro') }}" />
+                            <x-input id="neighborhood" class="block mt-1 w-full" type="text" name="neighborhood" :value="old('neighborhood')" required autofocus autocomplete="neighborhood" />
+                        </div>
                     </div>
-            
-                    <div class="mt-4">
-                        <x-label for="email" value="{{ __('Email') }}" />
-                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                    </div>
-            
-                    <div class="mt-4">
-                        <x-label for="password" value="{{ __('Password') }}" />
-                        <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <x-label for="city" value="{{ __('Cidade') }}" />
+                            <x-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required autofocus autocomplete="city" />
+                        </div>
+    
+                        <div>
+                            <x-label for="state" value="{{ __('Estado') }}" />
+                            <x-input id="state" class="block mt-1 w-full" type="text" name="state" :value="old('state')" required autofocus autocomplete="state" />
+                        </div>
+
+                        <div>
+                            <x-label for="cep" value="{{ __('Cep') }}" />
+                            <x-input id="cep" class="block mt-1 w-full" type="text" name="cep" :value="old('cep')" required autofocus autocomplete="cep" />
+                        </div>
                     </div>
 
                     <div class="flex items-center justify-end">
